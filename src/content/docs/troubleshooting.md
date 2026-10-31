@@ -41,7 +41,7 @@ Open the task and follow the link to the agent's thread.
 
 ## Tasks fail with "Failed to resolve the VCS driver"
 
-T3 Remix 0.1.5 fails every task this way when the company's project folder isn't a git repository or has no commits yet. Run `git init` in the folder, make a first commit, and use **Start agent** on the task. Later versions run agents in the folder itself instead.
+T3 Remix 0.1.5 fails every task this way when the company's project folder isn't a git repository or has no commits yet. [Update to 0.1.6 or later](/docs/install/), which runs agents in the folder itself, or run `git init` in the folder, make a first commit, and use **Start agent** on the task.
 
 ## A task is waiting on work from another task
 

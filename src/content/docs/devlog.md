@@ -7,6 +7,32 @@ order: 4
 
 Every T3 Remix release, newest first, with what it adds and the T3 Code release it is built on. Download any version from [GitHub Releases](https://github.com/codingphasedotcom/t3-remix/releases).
 
+## 0.1.6
+
+**October 31, 2026** · Built on T3 Code 0.1.5 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.6)
+
+The CEO helps you hire, finished work clears off the board, and the sidebar shows only what's still open.
+
+### New
+
+- **The CEO recommends the team.** Pick **CEO recommends the team** when you start a company, or use **Ask … who to hire** on the org chart, and the CEO proposes each role the company is missing. A proposed employee can report to another proposed one, so a CTO and their engineers arrive as one team, and you still approve every hire. See [Hire requests](/docs/org-chart/#hire-requests).
+- **Archive finished tasks.** Archive a task from its sheet, or everything in Done with **Archive all**. Subtasks go with it, and **Restore** brings one back. See [Archive finished tasks](/docs/board/#archive-finished-tasks).
+- **Only open threads in the sidebar.** Each employee's list in the Companies sidebar leaves out settled threads, and you can settle one from its row.
+
+### Fixed
+
+- **Needs attention** on the dashboard lists each thread whose latest run failed. It opens that thread and leaves the list once the thread runs again or settles, instead of staying there for good.
+- A company whose project folder isn't a git repository, or has no commits yet, runs its agents in the folder instead of failing with "Failed to resolve the VCS driver".
+
+### Changed
+
+- The board, org chart, dashboard, and Companies sidebar use sentence-case labels, lighter headings, and corners that fit their panels.
+
+### Downloads
+
+- Installers for macOS (Apple silicon and Intel), Windows x64, and Linux x64.
+- Builds are not signed. [Install](/docs/install/) shows how to open them the first time.
+
 ## 0.1.5
 
 **October 31, 2026** · Built on T3 Code 0.1.5 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.5)
