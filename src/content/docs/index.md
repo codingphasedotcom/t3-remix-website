@@ -35,3 +35,7 @@ Everything below the board is T3 Code. Agents run through the providers you alre
 - New here? [Install T3 Remix](/docs/install/), then follow [Your first company](/docs/quickstart/).
 - Want to know exactly how a task moves? Read [The board](/docs/board/).
 - Building agents or tooling on top? See the [Agent tools](/docs/agent-tools/) reference.
+
+## Thanks
+
+Big thanks to Theo and the [T3 Code](https://t3.codes) team, and to Dota, for the inspiration. T3 Remix stands on T3 Code's open-source work, and it would not exist without it.
