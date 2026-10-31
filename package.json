@@ -1,0 +1,23 @@
+{
+  "name": "t3-remix-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website and documentation for T3 Remix, an open-source fork of T3 Code with agent companies.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@phosphor-icons/core": "^2.1.1",
+    "astro": "^7.4.4"
+  }
+}

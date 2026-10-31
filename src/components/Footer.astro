@@ -1,0 +1,110 @@
+---
+import { site } from "../lib/site";
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="about">
+      <a class="brand" href="/">
+        <img src="/icon-192.png" alt="" width="28" height="28" />
+        <span>T3 Remix</span>
+      </a>
+      <p>
+        An independent fork of <a href={site.upstreamSite}>T3 Code</a> by T3 Tools Inc. Both are
+        released under the MIT license.
+      </p>
+    </div>
+    <nav class="cols" aria-label="Footer">
+      <div>
+        <h2>Docs</h2>
+        <a href="/docs/install/">Install</a>
+        <a href="/docs/quickstart/">Your first company</a>
+        <a href="/docs/board/">The board</a>
+        <a href="/docs/build-from-source/">Build from source</a>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <a href={site.repo}>Source code</a>
+        <a href={site.releases}>Releases</a>
+        <a href={site.issues}>Report an issue</a>
+        <a href={site.websiteRepo}>This website</a>
+      </div>
+      <div>
+        <h2>Upstream</h2>
+        <a href={site.upstreamSite}>t3.codes</a>
+        <a href={site.upstreamRepo}>T3 Code on GitHub</a>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-raised);
+    padding-block: 56px 64px;
+    font-size: 14.5px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+    gap: 48px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .brand img {
+    border-radius: 7px;
+  }
+
+  .about p {
+    max-width: 36ch;
+    margin: 16px 0 0;
+    color: var(--muted);
+  }
+
+  .about p a {
+    color: var(--text);
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .cols h2 {
+    margin: 0 0 12px;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+
+  .cols a {
+    display: block;
+    padding-block: 4px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .cols a:hover {
+    color: var(--lime);
+  }
+
+  @media (max-width: 760px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

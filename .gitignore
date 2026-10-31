@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+.DS_Store
+# Release builds belong on GitHub Releases, not in git (GitHub rejects files over 100 MB).
+*.dmg
+*.zip
+*.AppImage
+*.exe

@@ -1,0 +1,236 @@
+---
+import Icon from "./Icon.astro";
+
+// Column names and hints are the app's own (apps/web/src/components/board/board.logic.ts).
+interface Card {
+  title: string;
+  who?: { name: string; face?: string };
+  tag?: { label: string; icon?: string; lime?: boolean };
+}
+
+const columns: { label: string; hint: string; cards: Card[] }[] = [
+  {
+    label: "Ideas",
+    hint: "Waits for a human to schedule it.",
+    cards: [{ title: "Usage-based pricing page" }],
+  },
+  {
+    label: "To do",
+    hint: "Tasks with an assignee start automatically.",
+    cards: [
+      { title: "Regression tests for sign-up", who: { name: "Margaret", face: "margaret" } },
+      { title: "Record the launch demo", who: { name: "You" }, tag: { label: "Your task" } },
+    ],
+  },
+  {
+    label: "In progress",
+    hint: "An agent is working the task.",
+    cards: [
+      {
+        title: "Onboarding checklist UI",
+        who: { name: "Ada", face: "ada" },
+        tag: { label: "Subtask", icon: "tree-structure", lime: true },
+      },
+    ],
+  },
+  {
+    label: "Review",
+    hint: "The reviewer starts when one is set.",
+    cards: [
+      {
+        title: "Seed data for new accounts",
+        who: { name: "Linus", face: "linus" },
+        tag: { label: "Grace reviews", icon: "eye" },
+      },
+    ],
+  },
+  {
+    label: "Blocked",
+    hint: "Needs a decision or its subtasks.",
+    cards: [
+      {
+        title: "Launch onboarding",
+        who: { name: "Grace", face: "grace" },
+        tag: { label: "2 of 3 subtasks done", icon: "tree-structure" },
+      },
+    ],
+  },
+  {
+    label: "Done",
+    hint: "Approved work.",
+    cards: [
+      {
+        title: "Release notes for 0.2",
+        who: { name: "Mary", face: "mary" },
+        tag: { label: "PR merged", icon: "git-merge" },
+      },
+    ],
+  },
+];
+---
+
+<figure class="board" aria-label="A T3 Remix board with its six columns">
+  <div class="scroller">
+    {
+      columns.map((column, i) => (
+        <section class="col reveal" style={`--i:${i}`}>
+          <header>
+            <h3>{column.label}</h3>
+            <span class="count">{column.cards.length}</span>
+          </header>
+          <p class="hint">{column.hint}</p>
+          {column.cards.map((card) => (
+            <article class="card">
+              <p class="title">{card.title}</p>
+              <div class="meta">
+                {card.who ? (
+                  <span class="who">
+                    {card.who.face ? (
+                      <img class="face" src={`/faces/${card.who.face}.jpg`} alt="" width="22" height="22" />
+                    ) : (
+                      <span class="you">
+                        <Icon name="user" size={13} />
+                      </span>
+                    )}
+                    {card.who.name}
+                  </span>
+                ) : (
+                  <span class="who unassigned">Unassigned</span>
+                )}
+                {card.tag ? (
+                  <span class:list={["chip", { "chip-lime": card.tag.lime }]}>
+                    {card.tag.icon ? <Icon name={card.tag.icon} size={12} /> : null}
+                    {card.tag.label}
+                  </span>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</figure>
+
+<style>
+  .board {
+    margin: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-panel);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .scroller {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(176px, 1fr));
+    gap: 10px;
+    padding: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 236px;
+    padding: 12px;
+    border-radius: var(--r-card);
+    background: var(--bg-raised);
+    scroll-snap-align: start;
+  }
+
+  .col header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .col h3 {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 650;
+  }
+
+  .count {
+    min-width: 22px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    text-align: center;
+  }
+
+  .hint {
+    margin: 0 0 4px;
+    color: var(--faint);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-2);
+  }
+
+  .title {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 550;
+    line-height: 1.35;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+  }
+
+  .who {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .who .face {
+    width: 22px;
+    height: 22px;
+  }
+
+  .you {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1px dashed var(--faint);
+  }
+
+  .unassigned {
+    color: var(--faint);
+  }
+
+  .chip {
+    font-size: 11.5px;
+    padding: 2px 8px;
+  }
+
+  @media (max-width: 760px) {
+    .scroller {
+      grid-template-columns: repeat(6, 78%);
+    }
+  }
+</style>

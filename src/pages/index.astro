@@ -1,0 +1,973 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import SprayWord from "../components/SprayWord.astro";
+import OrgPreview from "../components/OrgPreview.astro";
+import BoardPreview from "../components/BoardPreview.astro";
+import { site } from "../lib/site";
+
+const flow = [
+  {
+    icon: "paper-plane-tilt",
+    verb: "Assign",
+    text: "New tasks go to the CEO, or to anyone you @mention.",
+  },
+  {
+    icon: "tree-structure",
+    verb: "Delegate",
+    text: "Managers split work into subtasks for their reports.",
+  },
+  {
+    icon: "eye",
+    verb: "Review",
+    text: "Each manager approves or sends back what its team delivers.",
+  },
+  {
+    icon: "git-pull-request",
+    verb: "Ship",
+    text: "You open a pull request or merge the branch. Never automatic.",
+  },
+];
+
+const skills = ["Planning and delegation", "Code review", "Testing", "Frontend", "Backend and APIs", "Writing"];
+
+// Example activity for the dashboard tile: tasks finished per day over two weeks.
+const activity = [2, 4, 3, 6, 5, 1, 0, 3, 7, 6, 8, 4, 9, 7];
+const maxActivity = Math.max(...activity);
+
+const providers = ["Codex", "Claude Code", "Cursor", "Grok Build", "OpenCode", "Antigravity"];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          Powered by <a href={site.upstreamSite}>T3 Code</a>
+          <span class="bolt-heart">
+            <Icon name="heart" weight="fill" size={20} />
+            <Icon name="lightning" weight="fill" size={7} class="bolt" />
+            <span class="sr-only">and</span>
+          </span>
+          <a href={site.codingphase}>CodingPhase</a>
+        </p>
+        <h1>Your coding agents, now a <SprayWord text="company." /></h1>
+        <p class="lede">
+          Give your CEO a task. Your team of agents plans it, builds it, reviews it, and hands it
+          back.
+        </p>
+        <div class="ctas">
+          <a class="btn btn-primary" href={site.releases}>
+            <Icon name="apple-logo" weight="fill" size={18} />
+            Download for Mac
+          </a>
+          <a class="btn btn-ghost" href="/docs/">
+            Read the docs
+            <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <OrgPreview />
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section board-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>A kanban board your agents actually work.</h2>
+        <p>
+          Move a task to To do and its assignee starts in a fresh thread. Agents talk only through
+          the board, so every decision stays where you can see it.
+        </p>
+      </div>
+      <BoardPreview />
+      <ol class="flow">
+        {
+          flow.map((step, i) => (
+            <li class="reveal" style={`--i:${i}`}>
+              <span class="flow-icon">
+                <Icon name={step.icon} size={18} />
+              </span>
+              <strong>{step.verb}</strong>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Everything a team needs to keep going.</h2>
+      </div>
+      <div class="bento">
+        <article class="tile tile-memory reveal">
+          <Icon name="brain" size={22} class="tile-icon" />
+          <h3>Memory that carries over</h3>
+          <p>
+            Agents start every task fresh, so each employee keeps short lessons, and managers keep a
+            company memory everyone reads.
+          </p>
+          <div class="memory-note company-note">
+            <div class="memory-head">
+              <img class="face" src="/faces/vera.jpg" alt="" width="24" height="24" />
+              <span>Company memory</span>
+            </div>
+            <ul>
+              <li>We use pnpm, never npm or yarn.</li>
+              <li>Billing code needs a human review before it ships.</li>
+            </ul>
+          </div>
+          <div class="memory-note">
+            <div class="memory-head">
+              <img class="face" src="/faces/grace.jpg" alt="" width="24" height="24" />
+              <span>Grace's memory</span>
+            </div>
+            <ul>
+              <li>Run <code>npm test -- --run</code> before review. Watch mode never exits.</li>
+              <li>Ask before adding a dependency.</li>
+              <li>Staging deploys from the <code>release</code> branch.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="tile tile-skills reveal" style="--i:1">
+          <Icon name="book-open-text" size={22} class="tile-icon" />
+          <h3>Skills as playbooks</h3>
+          <p>Write how a job is done once. Tick it on an employee and it rides along on every task.</p>
+          <div class="skill-chips">
+            {skills.map((skill) => <span class="chip">{skill}</span>)}
+          </div>
+        </article>
+
+        <article class="tile tile-routine reveal" style="--i:2">
+          <Icon name="repeat" size={22} class="tile-icon" />
+          <h3>Routines</h3>
+          <p>Add a task on a schedule, like a weekly review for the CEO.</p>
+          <p class="routine-line"><span>Every week</span> Weekly review</p>
+        </article>
+
+        <article class="tile tile-mention reveal" style="--i:3">
+          <p class="mention" aria-hidden="true">@CTO</p>
+          <h3>Mention by job</h3>
+          <p>Type @ and a role in a chat or a new task. The first person you mention gets it.</p>
+        </article>
+
+        <article class="tile tile-limit reveal" style="--i:4">
+          <Icon name="coins" size={22} class="tile-icon" />
+          <h3>Spending limits</h3>
+          <p>Monthly token limits per company or per employee.</p>
+          <dl class="limit-marks">
+            <div><dt>80%</dt><dd>Warns you</dd></div>
+            <div><dt>100%</dt><dd>Stops new runs</dd></div>
+          </dl>
+        </article>
+
+        <article class="tile tile-dash reveal" style="--i:5">
+          <div class="dash-copy">
+            <Icon name="chart-bar" size={22} class="tile-icon" />
+            <h3>A dashboard for each company</h3>
+            <p>
+              Open and finished tasks, who is working now, run success, time to done, and tokens by
+              model and department.
+            </p>
+          </div>
+          <div class="dash-visual">
+            <div class="bars" role="img" aria-label="Example: tasks finished per day over 14 days">
+              {activity.map((n) => <span style={`--h:${Math.max(n / maxActivity, 0.04)}`} />)}
+            </div>
+            <ul class="attention">
+              <li><Icon name="warning-circle" size={14} /> Blocked: Launch onboarding</li>
+              <li><Icon name="user-plus" size={14} /> Hire request: Security engineer</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container ship-grid">
+      <figure class="ship-panel reveal" aria-label="The Ship and Linked work sections of a task">
+        <div class="ship-title">
+          <strong>Launch onboarding</strong>
+          <span class="chip">Review</span>
+        </div>
+        <div class="ship-block">
+          <h4>Ship</h4>
+          <div class="ship-buttons">
+            <span class="btn btn-primary btn-sm">
+              <Icon name="git-pull-request" size={16} />
+              Open pull request
+            </span>
+            <span class="btn btn-ghost btn-sm">
+              <Icon name="git-merge" size={16} />
+              Merge
+            </span>
+          </div>
+        </div>
+        <div class="ship-block">
+          <h4>Linked work</h4>
+          <ul class="links">
+            <li><Icon name="git-branch" size={16} /><code>board/launch-onboarding</code></li>
+            <li>
+              <Icon name="git-pull-request" size={16} /><span>PR #48: Launch onboarding</span>
+              <span class="chip chip-lime">Open</span>
+            </li>
+            <li><Icon name="globe" size={16} /><span>Preview deployment</span></li>
+          </ul>
+        </div>
+      </figure>
+      <div class="ship-copy reveal" style="--i:1">
+        <h2>Nothing merges until you say so.</h2>
+        <p>
+          Every top-level task gets its own worktree and branch, and its subtasks build in that
+          same branch. When the work passes review, <strong>Ship</strong> opens a pull request or
+          merges the branch into your checkout.
+        </p>
+        <a class="text-link" href="/docs/shipping/">
+          How shipping works <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section upstream">
+    <div class="container upstream-grid">
+      <div class="reveal">
+        <h2>Still T3 Code underneath.</h2>
+        <p>
+          T3 Remix keeps everything T3 Code does: chats with {providers.slice(0, -1).join(", ")},
+          and {providers.at(-1)}, checkpoints after every turn, diffs, and remote connections.
+          Companies are added on top.
+        </p>
+      </div>
+      <dl class="facts reveal" style="--i:1">
+        <div>
+          <dt><code>~/.t3-remix</code></dt>
+          <dd>Its own data folder, so it never shares a database with T3 Code.</dd>
+        </div>
+        <div>
+          <dt>Side by side</dt>
+          <dd>Installs as its own app next to T3 Code instead of replacing it.</dd>
+        </div>
+        <div>
+          <dt>No update feed</dt>
+          <dd>An upstream release never overwrites your fork. You update when you choose.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <h2>Fork it. Remix it.</h2>
+        <p>T3 Remix is MIT licensed. Read the code, build your own copy, or send a pull request.</p>
+        <div class="clone">
+          <code>{site.cloneCommand}</code>
+          <button type="button" class="copy" data-copy={site.cloneCommand} aria-label="Copy clone command">
+            <span class="copy-idle"><Icon name="copy" size={18} /></span>
+            <span class="copy-done"><Icon name="check" size={18} /></span>
+          </button>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-primary" href={site.repo}>
+            <Icon name="github-logo" size={18} />
+            View on GitHub
+          </a>
+          <a class="btn btn-ghost" href="/docs/build-from-source/">Build from source</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    padding-block: clamp(48px, 9vh, 88px) clamp(56px, 10vh, 104px);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* Faint wall grain, painted once. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero {
+    isolation: isolate;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    align-items: center;
+    gap: clamp(40px, 6vw, 80px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 22px;
+    padding: 5px 14px;
+    border: 1px solid var(--lime-line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+
+  .eyebrow a {
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+    transition: color 140ms ease;
+  }
+
+  .eyebrow a:hover {
+    color: var(--lime);
+  }
+
+  .bolt-heart {
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: var(--lime);
+  }
+
+  .bolt-heart :global(svg) {
+    grid-area: 1 / 1;
+  }
+
+  .bolt-heart :global(.bolt) {
+    color: var(--lime-ink);
+    transform: translateY(-1px);
+  }
+
+  h1 {
+    margin: 0 0 0.55em;
+    font-size: clamp(2.05rem, 4.6vw + 0.4rem, 3.9rem);
+    font-weight: 750;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .lede {
+    max-width: 44ch;
+    margin: 0 0 32px;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js .hero-copy > * {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 700ms var(--ease-out) forwards;
+    }
+
+    .js .hero-copy > :nth-child(2) {
+      animation-delay: 80ms;
+    }
+
+    .js .hero-copy > :nth-child(3) {
+      animation-delay: 200ms;
+    }
+
+    .js .hero-copy > :nth-child(4) {
+      animation-delay: 280ms;
+    }
+  }
+
+  @keyframes rise {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Sections */
+  .section {
+    padding-block: clamp(72px, 11vw, 128px);
+  }
+
+  .section-head {
+    max-width: 680px;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 3.6vw, 2.9rem);
+    font-weight: 720;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .section-head p,
+  .ship-copy p,
+  .upstream p,
+  .cta-panel p {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 1.075rem;
+  }
+
+  /* Flow */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .flow li {
+    position: relative;
+  }
+
+  .flow-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: var(--lime-soft);
+    color: var(--lime);
+  }
+
+  .flow strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .flow p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* Bento */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      "mem mem skills skills"
+      "mem mem routine mention"
+      "limit dash dash dash";
+    gap: 14px;
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-panel);
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .tile h3 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+  }
+
+  .tile p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.97rem;
+  }
+
+  .tile :global(.tile-icon) {
+    margin-bottom: 18px;
+    color: var(--lime);
+  }
+
+  .tile-memory {
+    grid-area: mem;
+  }
+
+  .memory-note {
+    margin-top: auto;
+    padding: 16px 18px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-card);
+    background: var(--bg-raised);
+  }
+
+  .company-note {
+    margin-bottom: 12px;
+    border-style: dashed;
+    border-color: var(--lime-line);
+  }
+
+  .tile-memory p {
+    margin-bottom: 28px;
+  }
+
+  .memory-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .memory-head .face {
+    width: 24px;
+    height: 24px;
+  }
+
+  .memory-note ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0 0 0 18px;
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .memory-note li::marker {
+    color: var(--lime);
+  }
+
+  .memory-note code,
+  .ship-panel code {
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.92em;
+  }
+
+  .tile-skills {
+    grid-area: skills;
+  }
+
+  .skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tile-routine {
+    grid-area: routine;
+    border-color: transparent;
+    background: var(--lime);
+    color: var(--lime-ink);
+  }
+
+  .tile-routine p,
+  .tile-routine :global(.tile-icon) {
+    color: rgb(11 12 10 / 0.78);
+  }
+
+  .routine-line {
+    margin-top: auto !important;
+    padding-top: 18px;
+    color: var(--lime-ink) !important;
+    font-weight: 600;
+  }
+
+  .routine-line span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.75;
+  }
+
+  .tile-mention {
+    grid-area: mention;
+  }
+
+  .mention {
+    margin: 0 0 14px !important;
+    color: var(--lime) !important;
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 3vw, 2.6rem) !important;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .tile-limit {
+    grid-area: limit;
+  }
+
+  .limit-marks {
+    display: grid;
+    gap: 10px;
+    margin: auto 0 0;
+    padding-top: 20px;
+  }
+
+  .limit-marks div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .limit-marks dt {
+    min-width: 3.4ch;
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .limit-marks dd {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .tile-dash {
+    grid-area: dash;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 28px;
+    background:
+      radial-gradient(120% 140% at 100% 100%, rgb(184 247 43 / 0.08), transparent 60%),
+      var(--surface);
+  }
+
+  .dash-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 96px;
+  }
+
+  .bars span {
+    flex: 1;
+    height: calc(var(--h) * 100%);
+    border-radius: 4px 4px 2px 2px;
+    background: var(--lime);
+    opacity: 0.85;
+  }
+
+  .attention {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .attention li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .attention :global(svg) {
+    color: var(--lime);
+  }
+
+  /* Ship */
+  .ship-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(40px, 7vw, 96px);
+  }
+
+  .ship-panel {
+    margin: 0;
+    padding: 22px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-panel);
+    background: var(--surface);
+  }
+
+  .ship-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.05rem;
+  }
+
+  .ship-block {
+    padding-top: 18px;
+  }
+
+  .ship-block h4 {
+    margin: 0 0 10px;
+    color: var(--faint);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  .ship-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ship-buttons .btn {
+    cursor: default;
+  }
+
+  .links {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: var(--bg-raised);
+    font-size: 13.5px;
+  }
+
+  .links li :global(svg) {
+    flex: none;
+    color: var(--muted);
+  }
+
+  .links .chip {
+    margin-left: auto;
+  }
+
+  .ship-copy p {
+    margin-bottom: 24px;
+  }
+
+  .ship-copy strong {
+    color: var(--text);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--lime);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .text-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* Upstream */
+  .upstream {
+    border-block: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .upstream-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(40px, 7vw, 96px);
+    align-items: start;
+  }
+
+  .facts {
+    margin: 0;
+  }
+
+  .facts div {
+    padding-block: 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .facts div:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .facts dt {
+    margin-bottom: 4px;
+    font-weight: 650;
+  }
+
+  .facts dt code {
+    color: var(--lime);
+    font-size: 0.98em;
+  }
+
+  .facts dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  /* CTA */
+  .cta-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(40px, 7vw, 80px) var(--gutter);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-panel);
+    background:
+      radial-gradient(80% 120% at 50% 0%, rgb(184 247 43 / 0.09), transparent 70%),
+      var(--surface);
+    text-align: center;
+  }
+
+  .cta-panel h2 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+  }
+
+  .clone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    margin: 32px 0 28px;
+    padding: 6px 6px 6px 18px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg);
+  }
+
+  .clone code {
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 14px;
+    scrollbar-width: none;
+  }
+
+  .copy {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .copy:hover {
+    background: var(--border-strong);
+  }
+
+  .copy-done,
+  .copy[data-state="copied"] .copy-idle {
+    display: none;
+  }
+
+  .copy[data-state="copied"] .copy-done {
+    display: block;
+    color: var(--lime);
+  }
+
+  .cta-panel .ctas {
+    justify-content: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 1080px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-visual {
+      width: 100%;
+      max-width: 560px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .ship-grid,
+    .upstream-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "mem mem"
+        "skills skills"
+        "routine mention"
+        "limit limit"
+        "dash dash";
+    }
+
+    .flow {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ship-panel {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .bento {
+      grid-template-columns: 1fr;
+      grid-template-areas: "mem" "skills" "routine" "mention" "limit" "dash";
+    }
+
+    .tile-dash {
+      grid-template-columns: 1fr;
+    }
+
+    .flow {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .tile {
+      padding: 22px;
+    }
+  }
+</style>

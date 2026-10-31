@@ -1,0 +1,192 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+
+// Seeded so the overspray is identical on every build and never shifts between deploys.
+let seed = 20261031;
+const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+
+const WIDTH = 640;
+const BAND_Y = 90;
+const SWEEP_MS = 900;
+const START_MS = 380;
+
+const speckles = Array.from({ length: 96 }, () => {
+  const x = 10 + rand() * (WIDTH - 20);
+  const side = rand() < 0.5 ? -1 : 1;
+  const spread = 50 + Math.pow(rand(), 1.8) * 62;
+  return {
+    x: x.toFixed(1),
+    y: (BAND_Y + side * spread).toFixed(1),
+    r: (0.8 + Math.pow(rand(), 2) * 4.2).toFixed(2),
+    delay: Math.round(START_MS + (x / WIDTH) * SWEEP_MS),
+  };
+});
+
+const drips = [
+  { x: 132, length: 54 },
+  { x: 336, length: 92 },
+  { x: 498, length: 40 },
+].map((drip, i) => ({ ...drip, delay: START_MS + SWEEP_MS + 120 + i * 140 }));
+---
+
+<span class="spray" style={`--start:${START_MS}ms; --sweep:${SWEEP_MS}ms`}>
+  <svg class="paint" viewBox="0 0 640 200" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <!-- userSpaceOnUse: a bounding-box region would follow the thin path and clip the wide stroke. -->
+      <filter id="spray-edge" filterUnits="userSpaceOnUse" x="-80" y="-60" width="800" height="320">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="16" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="spray-mist" filterUnits="userSpaceOnUse" x="-80" y="-60" width="800" height="320">
+        <feGaussianBlur stdDeviation="9" />
+      </filter>
+    </defs>
+    <path
+      class="stroke mist"
+      pathLength="1"
+      d="M 54 92 C 180 74, 420 104, 590 80"
+      filter="url(#spray-mist)"
+    />
+    <path
+      class="stroke core"
+      pathLength="1"
+      d="M 54 92 C 180 74, 420 104, 590 80"
+      filter="url(#spray-edge)"
+    />
+    <g class="speckles">
+      {speckles.map((s) => <circle cx={s.x} cy={s.y} r={s.r} style={`--d:${s.delay}ms`} />)}
+    </g>
+    <g class="drips">
+      {
+        drips.map((drip) => (
+          <g style={`--d:${drip.delay}ms`}>
+            <path class="drip" pathLength="1" d={`M ${drip.x} 128 L ${drip.x} ${128 + drip.length}`} />
+            <circle class="bead" cx={drip.x} cy={128 + drip.length + 2} r="7" />
+          </g>
+        ))
+      }
+    </g>
+  </svg>
+  <span class="word">{text}</span>
+</span>
+
+<style>
+  .spray {
+    position: relative;
+    display: inline-block;
+    padding-inline: 0.1em 0.14em;
+    isolation: isolate;
+  }
+
+  .paint {
+    position: absolute;
+    z-index: -1;
+    left: -0.2em;
+    top: -0.22em;
+    width: calc(100% + 0.4em);
+    height: 1.75em;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .stroke {
+    fill: none;
+    stroke: var(--lime);
+    stroke-linecap: round;
+  }
+
+  .mist {
+    stroke-width: 150;
+    opacity: 0.2;
+  }
+
+  .core {
+    stroke-width: 114;
+  }
+
+  .speckles circle,
+  .bead {
+    fill: var(--lime);
+  }
+
+  .drip {
+    fill: none;
+    stroke: var(--lime);
+    stroke-width: 9;
+    stroke-linecap: round;
+  }
+
+  .word {
+    color: var(--lime-ink);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .stroke {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: spray-sweep var(--sweep) cubic-bezier(0.45, 0.05, 0.35, 1) var(--start) forwards;
+    }
+
+    .speckles circle {
+      opacity: 0;
+      transform: scale(0.3);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: speckle-land 260ms ease-out var(--d) forwards;
+    }
+
+    .drip {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: spray-sweep 1100ms cubic-bezier(0.2, 0.7, 0.3, 1) var(--d) forwards;
+    }
+
+    .bead {
+      opacity: 0;
+      transform: translateY(-14px);
+      animation: bead-drop 1100ms cubic-bezier(0.2, 0.7, 0.3, 1) var(--d) forwards;
+    }
+
+    .word {
+      color: var(--text);
+      animation: word-ink 420ms ease-out calc(var(--start) + var(--sweep) * 0.45) forwards;
+    }
+  }
+
+  @keyframes spray-sweep {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes speckle-land {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bead-drop {
+    0% {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes word-ink {
+    to {
+      color: var(--lime-ink);
+    }
+  }
+</style>

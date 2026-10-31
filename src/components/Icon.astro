@@ -1,0 +1,25 @@
+---
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+interface Props {
+  name: string;
+  weight?: "regular" | "bold" | "fill";
+  size?: number;
+  class?: string;
+}
+
+const { name, weight = "regular", size = 20, class: className } = Astro.props;
+const file = weight === "regular" ? name : `${name}-${weight}`;
+// Read at build time so pages ship inline SVG and no icon runtime.
+const raw = readFileSync(
+  join(process.cwd(), "node_modules/@phosphor-icons/core/assets", weight, `${file}.svg`),
+  "utf8",
+);
+const svg = raw.replace(
+  "<svg ",
+  `<svg width="${size}" height="${size}" aria-hidden="true" focusable="false"${className ? ` class="${className}"` : ""} `,
+);
+---
+
+<Fragment set:html={svg} />

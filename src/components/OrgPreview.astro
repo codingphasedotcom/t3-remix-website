@@ -1,0 +1,362 @@
+---
+import Icon from "./Icon.astro";
+
+// A small, faithful rendition of the app's Org chart tab: the Software team template under a CEO,
+// plus a pending hire request, which the app pins to the top of the chart.
+const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
+---
+
+<figure class="org" aria-label="The Org chart tab of a T3 Remix company">
+  <div class="bar">
+    <span class="company">Fernway</span>
+    <div class="tabs" role="presentation">
+      {tabs.map((tab) => <span class:list={["tab", { active: tab === "Org chart" }]}>{tab}</span>)}
+    </div>
+  </div>
+
+  <div class="hire">
+    <span class="hire-icon"><Icon name="user-plus" size={18} /></span>
+    <div class="hire-text">
+      <strong>Security engineer</strong>
+      <span>Engineering, requested by Grace</span>
+    </div>
+    <span class="hire-actions">
+      <span class="fake-btn ghost">Decline</span>
+      <span class="fake-btn">Hire</span>
+    </span>
+  </div>
+
+  <div class="tree">
+    <ul>
+      <li>
+        <div class="node ceo" style="--i:0">
+          <img class="face" src="/faces/vera.jpg" alt="" width="52" height="52" />
+          <strong>Vera</strong>
+          <span>CEO</span>
+        </div>
+        <ul>
+          <li>
+            <div class="node" style="--i:1">
+              <img class="face" src="/faces/grace.jpg" alt="" width="44" height="44" />
+              <strong>Grace</strong>
+              <span>CTO</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node" style="--i:3">
+                  <img class="face" src="/faces/linus.jpg" alt="" width="44" height="44" />
+                  <strong>Linus</strong>
+                  <span>Engineer</span>
+                </div>
+              </li>
+              <li>
+                <div class="node working" style="--i:4">
+                  <img class="face" src="/faces/ada.jpg" alt="" width="44" height="44" />
+                  <strong>Ada</strong>
+                  <span>Frontend</span>
+                </div>
+              </li>
+              <li>
+                <div class="node" style="--i:5">
+                  <img class="face" src="/faces/margaret.jpg" alt="" width="44" height="44" />
+                  <strong>Margaret</strong>
+                  <span>QA</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="node" style="--i:2">
+              <img class="face" src="/faces/peggy.jpg" alt="" width="44" height="44" />
+              <strong>Peggy</strong>
+              <span>Marketing</span>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .org {
+    margin: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-panel);
+    background: var(--surface);
+    box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.7);
+    overflow: hidden;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .company {
+    font-weight: 650;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 4px;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+
+  .tab {
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: var(--faint);
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .tab.active {
+    background: var(--surface-2);
+    color: var(--text);
+    box-shadow: inset 0 0 0 1px var(--border-strong);
+  }
+
+  .hire {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 16px 0;
+    padding: 10px 12px;
+    border: 1px dashed var(--lime-line);
+    border-radius: var(--r-card);
+    background: var(--lime-soft);
+  }
+
+  .hire-icon {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 999px;
+    background: var(--lime);
+    color: var(--lime-ink);
+  }
+
+  .hire-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.3;
+  }
+
+  .hire-text strong {
+    font-size: 13.5px;
+  }
+
+  .hire-text span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .hire-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+  }
+
+  .fake-btn {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--lime);
+    color: var(--lime-ink);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .fake-btn.ghost {
+    background: transparent;
+    color: var(--muted);
+  }
+
+  .tree {
+    --line: var(--border-strong);
+    padding: 20px 12px 24px;
+  }
+
+  .tree ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 20px 0 0;
+  }
+
+  .tree > ul {
+    padding-top: 0;
+  }
+
+  .tree li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 4px 0;
+    list-style: none;
+  }
+
+  .tree li::before,
+  .tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: 50%;
+    height: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .tree li::after {
+    right: auto;
+    left: 50%;
+    border-left: 1px solid var(--line);
+  }
+
+  .tree li:only-child {
+    padding-top: 0;
+  }
+
+  .tree li:only-child::before,
+  .tree li:only-child::after {
+    display: none;
+  }
+
+  .tree li:first-child::before,
+  .tree li:last-child::after {
+    border: 0 none;
+  }
+
+  .tree li:last-child::before {
+    border-right: 1px solid var(--line);
+    border-radius: 0 10px 0 0;
+  }
+
+  .tree li:first-child::after {
+    border-radius: 10px 0 0 0;
+  }
+
+  .tree ul ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 20px;
+    border-left: 1px solid var(--line);
+  }
+
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 88px;
+    padding: 10px 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    background: var(--surface-2);
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .node .face {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 6px;
+  }
+
+  .node strong {
+    font-size: 13px;
+  }
+
+  .node span {
+    color: var(--muted);
+    font-size: 11.5px;
+  }
+
+  .ceo {
+    width: 110px;
+    border-color: var(--lime-line);
+  }
+
+  .ceo .face {
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 0 0 2px var(--lime);
+  }
+
+  /* An agent mid-task, the way the app marks who is working now. */
+  .working .face {
+    box-shadow:
+      0 0 0 2px var(--surface-2),
+      0 0 0 4px var(--lime);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js .node {
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+      animation: node-in 520ms var(--ease-out) forwards;
+      animation-delay: calc(500ms + var(--i) * 110ms);
+    }
+
+    .js .hire {
+      opacity: 0;
+      animation: node-in 520ms var(--ease-out) 1300ms forwards;
+    }
+  }
+
+  @keyframes node-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .tree {
+      padding-inline: 4px;
+    }
+
+    .tree li {
+      padding-inline: 3px;
+    }
+
+    .node {
+      width: 70px;
+      padding: 8px 4px 6px;
+    }
+
+    .ceo {
+      width: 84px;
+    }
+
+    .node .face {
+      width: 36px;
+      height: 36px;
+    }
+
+    .node strong {
+      font-size: 12px;
+    }
+
+    .node span {
+      font-size: 10.5px;
+    }
+
+    .hire-text span {
+      display: none;
+    }
+  }
+</style>

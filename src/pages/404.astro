@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found">
+  <section class="container missing">
+    <h1>Nothing painted here yet.</h1>
+    <p>This page moved or never existed.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Go home</a>
+      <a class="btn btn-ghost" href="/docs/">Read the docs</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .missing {
+    padding-block: 120px 160px;
+  }
+
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+  }
+
+  p {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>
