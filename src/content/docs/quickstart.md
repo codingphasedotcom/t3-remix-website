@@ -13,7 +13,7 @@ This walkthrough takes about ten minutes of your time. The agents do the rest.
 2. Click **New company**.
 3. Give it a **name**, a **mission** (one or two sentences about what the company is for), a **CEO name**, and a **model** for the CEO.
 4. Pick where the team works: a **new project folder**, or one of your existing projects. To point the company at an existing repository, add its folder as a project first.
-5. Pick a team. **Software team** adds a CTO, two engineers, and a QA engineer, each with starter skills. **Just a CEO** lets you hire everyone yourself.
+5. Pick a team. **Software team** adds a CTO, two engineers, and a QA engineer, each with starter skills. **CEO recommends the team** has the CEO propose who to hire for the mission, and you approve each person on **Org chart**. **Just a CEO** lets you hire everyone yourself.
 
 The company opens on its dashboard. Use **Board** to switch to the kanban board.
 

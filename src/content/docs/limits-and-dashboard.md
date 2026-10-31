@@ -29,9 +29,11 @@ At the top:
 Below that:
 
 - Daily activity for the last 14 days
-- A **Needs attention** list: blocked or unassigned tasks, hire requests, and failed runs
+- A **Needs attention** list: blocked or unassigned tasks, hire requests, and every employee thread whose latest run failed
 - A breakdown by model and by department
 - A row for every employee
+
+A failed run in **Needs attention** opens its thread. It leaves the list once that thread runs again without failing, whether the board restarts it or you continue it from the thread itself, or once the thread settles.
 
 ## How tokens are counted
 

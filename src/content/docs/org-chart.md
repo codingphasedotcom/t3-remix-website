@@ -38,9 +38,15 @@ Agents see who is in each department, so the CEO can route work to the right tea
 
 ## Hire requests
 
-When an agent needs a role nobody has, it asks you. The request appears at the top of the org chart with the role, the department, who they would report to, who asked, and why.
+When an agent needs a role nobody has, it asks you. The request appears at the top of the org chart with the role, the department, who they would report to, who asked, why, their skills, and their standing instructions.
 
 Choose **Hire** to add them, or **Decline**. The agent exists only after you approve it, so agents can never grow the team on their own.
+
+### Ask the CEO who to hire
+
+The **Ask … who to hire** button on the org chart, with your CEO's name in it, gives the CEO a **Recommend who to hire** task. The CEO checks who is already on the team and which requests are still waiting, then files a request for each role the company is missing. A company started with **CEO recommends the team** begins with this task.
+
+A proposed employee can report to another proposed employee, such as engineers under a new CTO. They appear under that request, and you hire the manager first: their **Hire** button waits until the manager is hired, and they then report to the new employee. Declining a manager moves their proposed reports up to that manager's own manager.
 
 ## Permissions
 

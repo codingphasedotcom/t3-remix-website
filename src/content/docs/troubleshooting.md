@@ -37,7 +37,11 @@ Check, in order:
 Open the task and follow the link to the agent's thread.
 
 - If the thread is waiting for approval, the employee's permission mode is not **Full access**. Approve the prompt in the thread, or change their permissions.
-- If the run failed, the task's runs list says so and the dashboard lists it under **Needs attention**. Comment on the task to tell the agent what to do, or use **Start agent** to retry.
+- If the run failed, the task's runs list says so and the dashboard lists the thread under **Needs attention** until it runs again. Comment on the task to tell the agent what to do, or use **Start agent** to retry.
+
+## Tasks fail with "Failed to resolve the VCS driver"
+
+T3 Remix 0.1.5 fails every task this way when the company's project folder isn't a git repository or has no commits yet. Run `git init` in the folder, make a first commit, and use **Start agent** on the task. Later versions run agents in the folder itself instead.
 
 ## A task is waiting on work from another task
 

@@ -17,6 +17,8 @@ Turn it off to start tasks only with **Start agent** on a task. This is a good w
 
 When on, each top-level task gets its own git worktree on a `board/<task>` branch from the project's current `HEAD`. Subtasks work in their parent's worktree.
 
+A project folder that isn't a git repository, or a repository with no commits yet, has nothing to branch from, so agents work in the folder itself. Make a first commit to give later tasks their own worktrees.
+
 Turn it off to let agents share the project checkout. Only do that for a company that works on one task at a time, since parallel agents in the same checkout will trip over each other.
 
 ## Agents at once

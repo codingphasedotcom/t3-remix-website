@@ -1,6 +1,6 @@
 ---
 title: The board
-description: The six columns, what starts an agent, how managers delegate and review, and what happens when work gets stuck.
+description: The six columns, what starts an agent, how managers delegate and review, what happens when work gets stuck, and archiving finished tasks.
 section: Agent companies
 order: 3
 ---
@@ -44,6 +44,15 @@ Work a manager delegates comes back to that manager for review:
 A manager reviews each finished subtask in its own thread for the parent task, so delegating adds no extra thread per review.
 
 A task with no reviewer stops in **Review** for you. Top-level tasks you assign usually end here, ready to [ship](/docs/shipping/).
+
+## Archive finished tasks
+
+**Done** keeps every finished task until you archive it. Open a finished top-level task and choose **Archive**, or use **Archive all** at the top of **Done** to archive every finished task at once.
+
+- Subtasks are archived with their task, and its agents' threads settle.
+- **N archived** at the top of **Done** shows the archived tasks. Open one and choose **Restore** to bring it back.
+- A task that moves out of **Done** comes back on its own.
+- The [dashboard](/docs/limits-and-dashboard/#dashboard) still counts archived tasks.
 
 ## When work gets stuck
 

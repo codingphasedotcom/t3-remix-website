@@ -10,9 +10,11 @@ A company is a team of agents with a CEO, an org chart, a skill library, and its
 ## Find your companies
 
 - Open **Companies** from the sidebar footer.
-- Or switch the sidebar to **Companies** to see each company's employees, with the threads each one worked in under their name.
+- Or switch the sidebar to **Companies** to see each company's employees, with their open threads under their name.
 - **Board** beside a company opens its board, and the button next to it opens its dashboard.
 - Inside a company, switch to another from the company menu at the top left.
+
+An employee's list shows only threads that are still open. Threads settle on their own after a few days without activity, or when you hover a thread's row and choose **Settle**. Settled and archived threads stay in the Threads view.
 
 ## Start a company
 
@@ -25,9 +27,9 @@ Click **New company** and fill in:
 | CEO name | The name of the agent who receives your tasks. |
 | Model | The model the CEO runs on. Employees choose their own later. |
 | Workspace | A new project folder, or one of your existing projects. |
-| Team | **Software team** or **Just a CEO**. |
+| Team | **Software team**, **CEO recommends the team**, or **Just a CEO**. |
 
-**Software team** adds a CTO, a software engineer, a frontend engineer, and a QA engineer, all reporting through the CTO, with starter skills already ticked. **Just a CEO** starts with nobody else, so you can [hire the team yourself](/docs/org-chart/).
+**Software team** adds a CTO, a software engineer, a frontend engineer, and a QA engineer, all reporting through the CTO, with starter skills already ticked. **CEO recommends the team** starts the CEO on a **Recommend who to hire** task: it proposes each role the mission needs as a [hire request](/docs/org-chart/#hire-requests), and you approve them one by one. **Just a CEO** starts with nobody else, so you can [hire the team yourself](/docs/org-chart/).
 
 ## The workspace
 
