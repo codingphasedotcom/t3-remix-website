@@ -38,4 +38,4 @@ Everything below the board is T3 Code. Agents run through the providers you alre
 
 ## Thanks
 
-Big thanks to Theo and the [T3 Code](https://t3.codes) team, and to Dota, for the inspiration. T3 Remix stands on T3 Code's open-source work, and it would not exist without it.
+Big thanks to [Theo](https://x.com/theo) and the [T3 Code](https://t3.codes) team, and to [@Dotta](https://x.com/dotta), for the inspiration. T3 Remix stands on T3 Code's open-source work, and it would not exist without it.
