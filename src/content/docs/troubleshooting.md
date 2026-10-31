@@ -13,6 +13,14 @@ Release builds are not notarized. Open **System Settings** > **Privacy & Securit
 xattr -dr com.apple.quarantine "/Applications/T3 Remix.app"
 ```
 
+## Windows says it protected your PC
+
+Release builds are not signed, so SmartScreen stops the installer. Choose **More info**, then **Run anyway**.
+
+## The Linux AppImage does not open
+
+Make it executable with `chmod +x`. If it reports that FUSE is missing, install your distribution's FUSE package (`fuse3` on Ubuntu and Debian), or start it with `--appimage-extract-and-run`.
+
 ## A task in To do never starts
 
 Check, in order:

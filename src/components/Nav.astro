@@ -3,7 +3,8 @@ import Icon from "./Icon.astro";
 import { site } from "../lib/site";
 
 const path = Astro.url.pathname;
-const inDocs = path.startsWith("/docs");
+const inDevlog = path.startsWith("/docs/devlog");
+const inDocs = path.startsWith("/docs") && !inDevlog;
 ---
 
 <header class="nav">
@@ -15,14 +16,15 @@ const inDocs = path.startsWith("/docs");
     <nav class="links" aria-label="Main">
       <a href="/#features">Features</a>
       <a href="/docs/" aria-current={inDocs ? "page" : undefined}>Docs</a>
+      <a href="/docs/devlog/" aria-current={inDevlog ? "page" : undefined}>Dev log</a>
       <a href={site.repo} class="github">
         <Icon name="github-logo" size={18} />
         <span>GitHub</span>
       </a>
     </nav>
     <a class="btn btn-primary btn-sm download" href={site.releases}>
-      <Icon name="apple-logo" weight="fill" size={16} />
-      Download for Mac
+      <Icon name="download-simple" weight="bold" size={16} />
+      Download
     </a>
   </div>
 </header>

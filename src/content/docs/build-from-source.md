@@ -46,8 +46,15 @@ This builds a `.dmg` named T3 Remix into the `release/` folder. It is the same a
 | `T3CODE_DESKTOP_HOME_DIR` | `.t3-remix` | The data folder in your home directory. |
 | `T3CODE_DESKTOP_USER_DATA_DIR` | `t3remix` | The Electron profile folder. |
 | `T3CODE_DESKTOP_ICON_PNG` | `assets/fork/t3-remix-macos-1024.png` | A 1024px app icon. |
+| `T3CODE_DESKTOP_ICON_ICO` | `assets/fork/t3-remix-windows.ico` | The Windows app icon. |
 
 Leave `GITHUB_REPOSITORY` unset so the build has no update feed and never replaces itself with an upstream release.
+
+For Windows or Linux, set the same variables and run `vp run dist:desktop:win` or `vp run dist:desktop:linux`. Linux builds need a Linux machine.
+
+## Publish a release
+
+The **T3 Remix desktop builds** workflow in the repository's GitHub Actions builds all four installers. Run it with a release tag such as `v0.1.6`, matching the version in `apps/desktop/package.json`. It attaches the installers to that GitHub Release, creating the release if it does not exist. Then add the release to the [dev log](/docs/devlog/).
 
 ## Make your own fork
 

@@ -41,6 +41,10 @@ order: 3 # position within its section
 
 The sidebar, previous and next links, and the "On this page" list are generated from these files. Every docs page links to its source with "Edit this page on GitHub".
 
+## Dev log
+
+Each release gets a section at the top of `src/content/docs/devlog.md`, under the intro: the version as a `##` heading, then the date, the T3 Code release it is built on, a link to its GitHub Release, and what changed. Add it once the release's installers are attached, so the page never points at a download that does not exist yet.
+
 ## Project layout
 
 ```

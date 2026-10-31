@@ -1,19 +1,30 @@
 ---
 title: Install
-description: Download the macOS app, open it the first time, and connect a provider.
+description: Download T3 Remix for macOS, Windows, or Linux, open it the first time, and connect a provider.
 section: Get started
 order: 2
 ---
 
-## Download the Mac app
+## Download
 
-Download the latest `.dmg` from [GitHub Releases](https://github.com/codingphasedotcom/t3-remix/releases/latest). Builds are for Apple silicon Macs. Open the disk image and drag **T3 Remix** into **Applications**.
+Download the installer for your computer from the [latest release](https://github.com/codingphasedotcom/t3-remix/releases/latest). Its file name ends in:
 
-On other platforms, or on an Intel Mac, [build from source](/docs/build-from-source/).
+| Computer | File |
+| --- | --- |
+| Mac with Apple silicon | `mac-arm64.dmg` |
+| Mac with an Intel processor | `mac-x64.dmg` |
+| Windows, 64-bit | `windows-x64-setup.exe` |
+| Linux, 64-bit | `linux-x86_64.AppImage` |
+
+There are no builds for ARM-based Windows or Linux yet. On those, [build from source](/docs/build-from-source/).
 
 ## Open it the first time
 
-T3 Remix release builds are not notarized by Apple, so macOS blocks the first launch with a warning that it cannot check the app. Do one of the following once:
+T3 Remix release builds are not signed, so your computer warns you the first time you open one.
+
+### macOS
+
+Open the disk image and drag **T3 Remix** into **Applications**. The app is not notarized by Apple, so macOS blocks the first launch with a warning that it cannot check the app. Do one of the following once:
 
 - Open **System Settings** > **Privacy & Security**, scroll to the message about T3 Remix, and choose **Open Anyway**.
 - Or clear the download quarantine flag in Terminal:
@@ -23,6 +34,21 @@ xattr -dr com.apple.quarantine "/Applications/T3 Remix.app"
 ```
 
 After that, T3 Remix opens like any other app.
+
+### Windows
+
+Run the installer. If Windows SmartScreen says it protected your PC, choose **More info**, then **Run anyway**. T3 Remix installs for your user account and opens when it finishes.
+
+The Windows build runs agents on Windows itself. It cannot run them inside WSL yet.
+
+### Linux
+
+Make the AppImage executable, then run it:
+
+```bash
+chmod +x T3-Remix-*-linux-x86_64.AppImage
+./T3-Remix-*-linux-x86_64.AppImage
+```
 
 ## Connect a provider
 
@@ -43,10 +69,16 @@ Every employee in a company picks its own model, so one company can mix provider
 
 T3 Remix and T3 Code are separate apps. They can be installed and open at the same time:
 
-- T3 Remix keeps its data in `~/.t3-remix`. T3 Code keeps its data in `~/.t3`. Neither touches the other's database.
+- T3 Remix keeps its data in `.t3-remix` in your home folder. T3 Code keeps its data in `.t3`. Neither touches the other's database.
 - T3 Remix has no automatic update feed. A new T3 Code release never replaces it. To update, download a newer T3 Remix release.
 - Both apps answer `t3code://` links, so a link opened from outside either app may open either one.
 
 ## Updating
 
-Download the newer `.dmg` from Releases and replace the app in **Applications**. Your companies, boards, and threads live in `~/.t3-remix`, so they carry over.
+The [dev log](/docs/devlog/) lists what each release changes. To update, download the newer installer from [Releases](https://github.com/codingphasedotcom/t3-remix/releases/latest):
+
+- **macOS:** replace the app in **Applications**.
+- **Windows:** run the new installer.
+- **Linux:** replace the AppImage.
+
+Your companies, boards, and threads live in `.t3-remix` in your home folder, so they carry over.
