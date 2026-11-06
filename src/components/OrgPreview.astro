@@ -6,7 +6,7 @@ import Icon from "./Icon.astro";
 const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
 ---
 
-<figure class="org" aria-label="The Org chart tab of a T3 Remix company">
+<figure class="org remix-shell" data-remix-tone="blue" aria-label="The Org chart tab of a T3 Remix company">
   <div class="bar">
     <span class="company">Fernway</span>
     <div class="tabs" role="presentation">
@@ -14,8 +14,8 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
     </div>
   </div>
 
-  <div class="hire">
-    <span class="hire-icon"><Icon name="user-plus" size={18} /></span>
+  <div class="hire" data-remix-tone="yellow">
+    <span class="icon-tile hire-icon"><Icon name="user-plus" size={16} /></span>
     <div class="hire-text">
       <strong>Security engineer</strong>
       <span>Engineering, requested by Grace</span>
@@ -26,50 +26,69 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
     </span>
   </div>
 
-  <div class="tree">
+  <div class="tree remix-well">
     <ul>
       <li>
-        <div class="node ceo" style="--i:0">
-          <img class="face" src="/faces/vera.jpg" alt="" width="52" height="52" />
-          <strong>Vera</strong>
-          <span>CEO</span>
+        <div class="node ceo" data-remix-tone="yellow" style="--i:0">
+          <span class="ring"><img class="face" src="/faces/vera.jpg" alt="" width="52" height="52" /></span>
+          <span class="plate remix-card">
+            <span class="band"></span>
+            <strong>Vera</strong>
+            <span class="role">CEO</span>
+          </span>
         </div>
         <ul>
           <li>
-            <div class="node" style="--i:1">
-              <img class="face" src="/faces/grace.jpg" alt="" width="44" height="44" />
-              <strong>Grace</strong>
-              <span>CTO</span>
+            <div class="node" data-remix-tone="blue" style="--i:1">
+              <span class="ring"><img class="face" src="/faces/grace.jpg" alt="" width="44" height="44" /></span>
+              <span class="plate remix-card">
+                <span class="band"></span>
+                <strong>Grace</strong>
+                <span class="role">CTO</span>
+              </span>
             </div>
             <ul>
               <li>
-                <div class="node" style="--i:3">
-                  <img class="face" src="/faces/linus.jpg" alt="" width="44" height="44" />
-                  <strong>Linus</strong>
-                  <span>Engineer</span>
+                <div class="node" data-remix-tone="teal" style="--i:3">
+                  <span class="ring"><img class="face" src="/faces/linus.jpg" alt="" width="44" height="44" /></span>
+                  <span class="plate remix-card">
+                    <span class="band"></span>
+                    <strong>Linus</strong>
+                    <span class="role">Engineer</span>
+                  </span>
                 </div>
               </li>
               <li>
-                <div class="node working" style="--i:4">
-                  <img class="face" src="/faces/ada.jpg" alt="" width="44" height="44" />
-                  <strong>Ada</strong>
-                  <span>Frontend</span>
+                <div class="node" data-remix-tone="purple" style="--i:4">
+                  <span class="ring"><img class="face" src="/faces/ada.jpg" alt="" width="44" height="44" /></span>
+                  <span class="plate remix-card">
+                    <span class="band"></span>
+                    <strong>Ada</strong>
+                    <span class="role">Frontend</span>
+                    <span class="chip working" data-remix-tone="blue">Working</span>
+                  </span>
                 </div>
               </li>
               <li>
-                <div class="node" style="--i:5">
-                  <img class="face" src="/faces/margaret.jpg" alt="" width="44" height="44" />
-                  <strong>Margaret</strong>
-                  <span>QA</span>
+                <div class="node" data-remix-tone="green" style="--i:5">
+                  <span class="ring"><img class="face" src="/faces/margaret.jpg" alt="" width="44" height="44" /></span>
+                  <span class="plate remix-card">
+                    <span class="band"></span>
+                    <strong>Margaret</strong>
+                    <span class="role">QA</span>
+                  </span>
                 </div>
               </li>
             </ul>
           </li>
           <li>
-            <div class="node" style="--i:2">
-              <img class="face" src="/faces/peggy.jpg" alt="" width="44" height="44" />
-              <strong>Peggy</strong>
-              <span>Marketing</span>
+            <div class="node" data-remix-tone="pink" style="--i:2">
+              <span class="ring"><img class="face" src="/faces/peggy.jpg" alt="" width="44" height="44" /></span>
+              <span class="plate remix-card">
+                <span class="band"></span>
+                <strong>Peggy</strong>
+                <span class="role">Marketing</span>
+              </span>
             </div>
           </li>
         </ul>
@@ -80,26 +99,22 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
 
 <style>
   .org {
+    gap: 10px;
     margin: 0;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--r-panel);
-    background: var(--surface);
-    box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.7);
+    padding: 10px;
     overflow: hidden;
   }
 
   .bar {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-raised);
+    gap: 14px;
+    padding: 2px 4px;
   }
 
   .company {
-    font-weight: 650;
     font-size: 14px;
+    font-weight: 650;
     letter-spacing: -0.01em;
   }
 
@@ -111,39 +126,35 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
   }
 
   .tab {
-    padding: 4px 10px;
-    border-radius: 999px;
-    color: var(--faint);
-    font-size: 12.5px;
+    padding: 4px 9px;
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-button-radius);
+    background: var(--remix-surface);
+    color: var(--remix-text);
+    font-size: 12px;
+    font-weight: 600;
     white-space: nowrap;
   }
 
   .tab.active {
-    background: var(--surface-2);
-    color: var(--text);
-    box-shadow: inset 0 0 0 1px var(--border-strong);
+    background: var(--fill-blue);
+    color: #ffffff;
   }
 
   .hire {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 16px 16px 0;
-    padding: 10px 12px;
-    border: 1px dashed var(--lime-line);
-    border-radius: var(--r-card);
-    background: var(--lime-soft);
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-well-radius);
+    background: var(--tone-wash);
   }
 
   .hire-icon {
-    display: grid;
-    place-items: center;
     width: 32px;
     height: 32px;
-    flex: none;
-    border-radius: 999px;
-    background: var(--lime);
-    color: var(--lime-ink);
+    border-radius: 10px;
   }
 
   .hire-text {
@@ -158,7 +169,7 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
   }
 
   .hire-text span {
-    color: var(--muted);
+    color: var(--remix-text-muted);
     font-size: 12px;
   }
 
@@ -169,22 +180,24 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
   }
 
   .fake-btn {
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: var(--lime);
-    color: var(--lime-ink);
+    padding: 4px 11px;
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-button-radius);
+    background: var(--spray);
+    color: var(--spray-ink);
     font-size: 12px;
     font-weight: 600;
   }
 
   .fake-btn.ghost {
-    background: transparent;
-    color: var(--muted);
+    background: var(--remix-surface);
+    color: var(--remix-text);
   }
 
   .tree {
-    --line: var(--border-strong);
-    padding: 20px 12px 24px;
+    --line: color-mix(in oklab, var(--remix-text) 40%, transparent);
+    display: block;
+    padding: 18px 10px 20px;
   }
 
   .tree ul {
@@ -216,13 +229,13 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
     right: 50%;
     width: 50%;
     height: 20px;
-    border-top: 1px solid var(--line);
+    border-top: 2px solid var(--line);
   }
 
   .tree li::after {
     right: auto;
     left: 50%;
-    border-left: 1px solid var(--line);
+    border-left: 2px solid var(--line);
   }
 
   .tree li:only-child {
@@ -240,7 +253,7 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
   }
 
   .tree li:last-child::before {
-    border-right: 1px solid var(--line);
+    border-right: 2px solid var(--line);
     border-radius: 0 10px 0 0;
   }
 
@@ -254,53 +267,81 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
     top: 0;
     left: 50%;
     height: 20px;
-    border-left: 1px solid var(--line);
+    border-left: 2px solid var(--line);
   }
 
+  /* The app's person card: a round face sitting over a toned band on a white plate. */
   .node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 88px;
-    padding: 10px 6px 8px;
-    border: 1px solid var(--border);
-    border-radius: var(--r-card);
-    background: var(--surface-2);
+    position: relative;
+    width: 90px;
+    padding-top: 22px;
     text-align: center;
     line-height: 1.25;
   }
 
+  .ring {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    display: block;
+    padding: 3px;
+    border: 1px solid var(--remix-card-line);
+    border-radius: 999px;
+    background: var(--tone);
+    box-shadow: var(--remix-card-lift);
+    transform: translateX(-50%);
+  }
+
   .node .face {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 6px;
+    width: 40px;
+    height: 40px;
   }
 
-  .node strong {
-    font-size: 13px;
+  .plate {
+    align-items: center;
+    padding-bottom: 8px;
+    overflow: hidden;
+    box-shadow: var(--remix-card-lift);
   }
 
-  .node span {
-    color: var(--muted);
-    font-size: 11.5px;
+  .band {
+    align-self: stretch;
+    height: 26px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--remix-card-line);
+    background: var(--tone-shell);
+  }
+
+  .plate strong {
+    font-size: 12.5px;
+  }
+
+  .role {
+    color: var(--remix-text-muted);
+    font-size: 11px;
+  }
+
+  .working {
+    height: 18px;
+    margin-top: 5px;
+    padding: 0 6px;
+    font-size: 10.5px;
   }
 
   .ceo {
-    width: 110px;
-    border-color: var(--lime-line);
+    width: 112px;
+    padding-top: 26px;
   }
 
   .ceo .face {
-    width: 52px;
-    height: 52px;
-    box-shadow: 0 0 0 2px var(--lime);
+    width: 48px;
+    height: 48px;
   }
 
-  /* An agent mid-task, the way the app marks who is working now. */
-  .working .face {
-    box-shadow:
-      0 0 0 2px var(--surface-2),
-      0 0 0 4px var(--lime);
+  .ceo .band {
+    height: 30px;
+    margin-bottom: 20px;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -330,29 +371,34 @@ const tabs = ["Board", "Org chart", "Skills", "Routines", "Dashboard"];
     }
 
     .tree li {
-      padding-inline: 3px;
+      padding-inline: 2px;
     }
 
     .node {
-      width: 70px;
-      padding: 8px 4px 6px;
+      width: 72px;
+      padding-top: 18px;
     }
 
     .ceo {
-      width: 84px;
+      width: 88px;
     }
 
     .node .face {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
     }
 
-    .node strong {
-      font-size: 12px;
+    .band {
+      height: 20px;
+      margin-bottom: 14px;
     }
 
-    .node span {
-      font-size: 10.5px;
+    .plate strong {
+      font-size: 11.5px;
+    }
+
+    .role {
+      font-size: 10px;
     }
 
     .hire-text span {

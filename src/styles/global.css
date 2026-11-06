@@ -1,27 +1,48 @@
-/* One dark theme. Lime is the only accent; it comes from the T3 Remix app icon. */
+/* Colors, tones and outlines are copied from the T3 Remix app
+   (apps/web/src/components/board/remix.css). Keep the two in step so they read as one product. */
 :root {
-  color-scheme: dark;
+  color-scheme: light dark;
 
-  --bg: #0b0c0a;
-  --bg-raised: #0f110d;
-  --surface: #141711;
-  --surface-2: #1a1e16;
-  --border: #252a20;
-  --border-strong: #353c2d;
-  --text: #eef2e6;
-  --muted: #a0a897;
-  --faint: #7f8877;
+  --remix-page: #ebf4f5;
+  --remix-cloud: rgb(255 255 255 / 0.75);
+  --remix-cloud-far: rgb(255 255 255 / 0.4);
+  --remix-ink: #1d2a5c;
+  --remix-text: #1d2a5c;
+  --remix-text-muted: #5a6593;
+  --remix-surface: #ffffff;
+  --remix-blue: #3580f6;
+  --remix-yellow: #ffcf3a;
+  --remix-pink: #ff5c9d;
+  --remix-green: #34c965;
+  --remix-purple: #9a6cff;
+  --remix-orange: #ff9838;
+  --remix-teal: #1fc2b4;
+  --remix-red: #ff5a5a;
+  --remix-gray: #a3acc9;
+  --remix-glass: #d8ecff;
+  --remix-shell-radius: 20px;
+  --remix-well-radius: 14px;
+  --remix-card-radius: 12px;
+  --remix-button-radius: 8px;
+  --remix-paper-hover: color-mix(in oklab, var(--remix-blue) 10%, var(--remix-surface));
+  --remix-inset: color-mix(in oklab, var(--remix-blue) 7%, var(--remix-surface));
+  /* A hard drop under outlined shapes, like a sticker. */
+  --remix-lift: 0 2px 0 var(--remix-ink);
+  --remix-line-thin: 1.5px;
+  /* Cards and panels get a light 1px outline; labels keep the heavier ink. */
+  --remix-card-line: rgb(29 42 92 / 0.16);
+  --remix-card-lift: 0 1px 3px rgb(29 42 92 / 0.08);
 
-  --lime: #b8f72b;
-  --lime-hover: #c9ff4f;
-  --lime-ink: #0b0c0a;
-  --lime-soft: rgb(184 247 43 / 0.1);
-  --lime-line: rgb(184 247 43 / 0.32);
-
-  /* Radius rule: panels 16px, cards 12px, code 10px, buttons and chips are pills. */
-  --r-panel: 16px;
-  --r-card: 12px;
-  --r-code: 10px;
+  /* Slightly deeper than the app's fills, so small white labels stay readable on them. */
+  --fill-blue: #2b70e4;
+  --fill-purple: #8150f0;
+  /* The app icon's lime: the hero's spray paint and the primary buttons. */
+  --spray: #b8f72b;
+  --spray-hover: #c9ff4f;
+  --spray-ink: #1d2a5c;
+  /* Tone blue is too light for small text on white, so links use a deeper mix. */
+  --link: color-mix(in oklab, var(--remix-blue) 72%, var(--remix-ink));
+  --code-bg: #16204a;
 
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
@@ -31,6 +52,71 @@
   --nav-h: 64px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --remix-page: #252d3f;
+    --remix-cloud: rgb(255 255 255 / 0.08);
+    --remix-cloud-far: rgb(255 255 255 / 0.04);
+    --remix-ink: #080c24;
+    --remix-text: #eef1ff;
+    --remix-text-muted: #a5afd8;
+    --remix-surface: #222c5c;
+    --remix-gray: #6b76a3;
+    --remix-card-line: rgb(255 255 255 / 0.12);
+    --remix-card-lift: 0 1px 3px rgb(0 0 0 / 0.3);
+    --link: color-mix(in oklab, var(--remix-blue) 58%, white);
+    --code-bg: #141b3f;
+  }
+}
+
+/* A tone names one fill; the shell and wash are that fill mixed into the surface, so they follow
+   light and dark without a second palette. `on` is the text that sits on the fill. The site uses
+   ink on the brighter fills, where the app's white falls under readable contrast for small text. */
+[data-remix-tone] {
+  --tone-shell: color-mix(in oklab, var(--tone) 30%, var(--remix-surface));
+  --tone-wash: color-mix(in oklab, var(--tone) 12%, var(--remix-surface));
+  --tone-on: #1d2a5c;
+  --tone-lift: 0 2px 0 var(--tone-shell);
+}
+
+[data-remix-tone="blue"] {
+  --tone: var(--fill-blue);
+  --tone-on: #ffffff;
+}
+
+[data-remix-tone="purple"] {
+  --tone: var(--fill-purple);
+  --tone-on: #ffffff;
+}
+
+[data-remix-tone="yellow"] {
+  --tone: var(--remix-yellow);
+}
+
+[data-remix-tone="pink"] {
+  --tone: var(--remix-pink);
+}
+
+[data-remix-tone="green"] {
+  --tone: var(--remix-green);
+}
+
+[data-remix-tone="orange"] {
+  --tone: var(--remix-orange);
+}
+
+[data-remix-tone="teal"] {
+  --tone: var(--remix-teal);
+}
+
+[data-remix-tone="red"] {
+  --tone: var(--remix-red);
+}
+
+[data-remix-tone="gray"] {
+  --tone: var(--remix-gray);
 }
 
 *,
@@ -47,8 +133,8 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--remix-page);
+  color: var(--remix-text);
   font-family: var(--font-sans);
   font-size: 16.5px;
   line-height: 1.6;
@@ -68,12 +154,12 @@ a {
 }
 
 ::selection {
-  background: var(--lime);
-  color: var(--lime-ink);
+  background: var(--remix-yellow);
+  color: #1d2a5c;
 }
 
 :focus-visible {
-  outline: 2px solid var(--lime);
+  outline: 2px solid var(--remix-blue);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -109,9 +195,9 @@ pre {
   top: -48px;
   z-index: 100;
   padding: 8px 14px;
-  border-radius: 999px;
-  background: var(--lime);
-  color: var(--lime-ink);
+  border-radius: var(--remix-button-radius);
+  background: var(--spray);
+  color: var(--spray-ink);
   font-weight: 600;
   text-decoration: none;
 }
@@ -120,16 +206,17 @@ pre {
   top: 12px;
 }
 
-/* Buttons */
+/* Buttons: softly outlined, and they press down a little. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   height: 44px;
-  padding: 0 20px;
-  border-radius: 999px;
-  border: 1px solid transparent;
+  padding: 0 18px;
+  border-radius: var(--remix-button-radius);
+  border: 1px solid var(--remix-card-line);
+  box-shadow: var(--remix-card-lift);
   font: inherit;
   font-size: 15px;
   font-weight: 600;
@@ -137,66 +224,181 @@ pre {
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    transform 160ms var(--ease-out);
+    background-color 140ms ease,
+    box-shadow 100ms ease,
+    transform 100ms ease;
 }
 
 .btn:active {
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
 .btn-primary {
-  background: var(--lime);
-  color: var(--lime-ink);
+  background: var(--spray);
+  color: var(--spray-ink);
 }
 
 .btn-primary:hover {
-  background: var(--lime-hover);
+  background: var(--spray-hover);
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border-strong);
+  background: var(--remix-surface);
+  color: var(--remix-text);
 }
 
 .btn-ghost:hover {
-  background: var(--surface);
-  border-color: var(--faint);
+  background: var(--remix-paper-hover);
 }
 
 .btn-sm {
-  height: 36px;
-  padding: 0 14px;
+  height: 34px;
+  padding: 0 12px;
   font-size: 14px;
 }
 
+/* A small rounded label. With no tone it is white paper. */
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 3px 10px;
+  flex: none;
+  gap: 4px;
+  height: 22px;
+  padding: 0 9px;
+  border: var(--remix-line-thin) solid var(--remix-ink);
   border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  background: var(--surface-2);
-  color: var(--muted);
-  font-size: 12.5px;
-  font-weight: 500;
-  line-height: 1.4;
+  background: var(--remix-surface);
+  color: var(--remix-text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
-.chip-lime {
-  border-color: var(--lime-line);
-  background: var(--lime-soft);
-  color: var(--lime);
+.chip[data-remix-tone] {
+  background: var(--tone);
+  color: var(--tone-on);
+}
+
+.chip-wash[data-remix-tone] {
+  background: var(--tone-wash);
+  color: var(--remix-text);
+}
+
+/* The app's speech-bubble title for columns and panels. */
+.bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  width: fit-content;
+  height: 32px;
+  margin: 0;
+  padding: 0 12px;
+  border: 2px solid var(--remix-ink);
+  border-radius: 12px;
+  background: var(--tone);
+  box-shadow: var(--remix-lift);
+  color: var(--tone-on);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: normal;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The tail: a turned square whose two outlined sides make the point. */
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 12px;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--remix-ink);
+  border-bottom: 2px solid var(--remix-ink);
+  background: var(--tone);
+  transform: rotate(45deg);
+}
+
+.bubble::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 10px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.55);
+  transform: rotate(-12deg);
+}
+
+.bubble-sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.bubble-sm::before {
+  display: none;
+}
+
+.bubble-sm::after {
+  bottom: -4px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+}
+
+.icon-tile {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--remix-ink);
+  border-radius: 12px;
+  background: var(--tone);
+  box-shadow: var(--remix-lift);
+  color: var(--tone-on);
+}
+
+/* An outlined, toned container, the paler well inside it, and the white card on top. */
+.remix-shell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--remix-card-line);
+  border-radius: var(--remix-shell-radius);
+  background: var(--tone-shell);
+  box-shadow: var(--remix-card-lift);
+}
+
+.remix-well {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--remix-well-radius);
+  background: var(--tone-wash);
+}
+
+.remix-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--remix-card-line);
+  border-radius: var(--remix-card-radius);
+  background: var(--remix-surface);
+  color: var(--remix-text);
 }
 
 .face {
   border-radius: 999px;
   object-fit: cover;
-  background: var(--surface-2);
+  background: var(--remix-inset);
   flex: none;
 }
 

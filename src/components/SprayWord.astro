@@ -95,7 +95,7 @@ const drips = [
 
   .stroke {
     fill: none;
-    stroke: var(--lime);
+    stroke: var(--spray);
     stroke-linecap: round;
   }
 
@@ -110,18 +110,18 @@ const drips = [
 
   .speckles circle,
   .bead {
-    fill: var(--lime);
+    fill: var(--spray);
   }
 
   .drip {
     fill: none;
-    stroke: var(--lime);
+    stroke: var(--spray);
     stroke-width: 9;
     stroke-linecap: round;
   }
 
   .word {
-    color: var(--lime-ink);
+    color: var(--spray-ink);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -152,7 +152,7 @@ const drips = [
     }
 
     .word {
-      color: var(--text);
+      color: var(--remix-text);
       animation: word-ink 420ms ease-out calc(var(--start) + var(--sweep) * 0.45) forwards;
     }
   }
@@ -186,7 +186,7 @@ const drips = [
 
   @keyframes word-ink {
     to {
-      color: var(--lime-ink);
+      color: var(--spray-ink);
     }
   }
 </style>

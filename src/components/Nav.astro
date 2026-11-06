@@ -35,8 +35,8 @@ const inDocs = path.startsWith("/docs") && !inDevlog;
     top: 0;
     z-index: 50;
     height: var(--nav-h);
-    border-bottom: 1px solid var(--border);
-    background: rgb(11 12 10 / 0.86);
+    border-bottom: 1px solid var(--remix-card-line);
+    background: color-mix(in srgb, var(--remix-page) 86%, transparent);
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
   }
@@ -74,14 +74,15 @@ const inDocs = path.startsWith("/docs") && !inDevlog;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--muted);
+    color: var(--remix-text-muted);
+    font-weight: 500;
     text-decoration: none;
     transition: color 140ms ease;
   }
 
   .links a:hover,
   .links a[aria-current="page"] {
-    color: var(--text);
+    color: var(--remix-text);
   }
 
   @media (max-width: 720px) {

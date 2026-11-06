@@ -52,7 +52,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
 
     <article class="article">
       <header class="doc-head">
-        <p class="section-name">{doc.data.section}</p>
+        <p class="section-name chip chip-wash" data-remix-tone="blue">{doc.data.section}</p>
         <h1>{doc.data.title}</h1>
         <p class="description">{doc.data.description}</p>
       </header>
@@ -129,7 +129,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
     grid-template-columns: 232px minmax(0, 1fr) 200px;
     gap: 48px;
     align-items: start;
-    padding-block: 40px 96px;
+    padding-block: 32px 0;
   }
 
   .sidebar,
@@ -152,7 +152,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
   .group h2,
   .toc h2 {
     margin: 0 0 8px;
-    color: var(--text);
+    color: var(--remix-text);
     font-size: 13px;
     font-weight: 650;
   }
@@ -168,53 +168,56 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
     display: block;
     padding: 5px 12px;
     margin-left: -12px;
-    border-radius: 8px;
-    color: var(--muted);
+    border-radius: var(--remix-button-radius);
+    color: var(--remix-text-muted);
     font-size: 14.5px;
     line-height: 1.4;
     text-decoration: none;
   }
 
   .group a:hover {
-    color: var(--text);
-    background: var(--surface);
+    color: var(--remix-text);
+    background: var(--remix-surface);
   }
 
+  /* The current page reads like the app's active tab. */
   .group a[aria-current="page"] {
-    color: var(--lime);
-    background: var(--lime-soft);
-    font-weight: 550;
+    color: #ffffff;
+    background: var(--fill-blue);
+    font-weight: 600;
   }
 
   .toc a {
     display: block;
     padding: 4px 0;
-    color: var(--faint);
+    color: var(--remix-text-muted);
     font-size: 13.5px;
     line-height: 1.4;
     text-decoration: none;
   }
 
   .toc a:hover {
-    color: var(--text);
+    color: var(--remix-text);
   }
 
   .article {
-    max-width: 760px;
+    max-width: 800px;
     min-width: 0;
+    padding: clamp(20px, 4vw, 40px);
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-shell-radius);
+    background: var(--remix-surface);
+    box-shadow: var(--remix-card-lift);
   }
 
   .doc-head {
     padding-bottom: 28px;
     margin-bottom: 8px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--remix-card-line);
   }
 
   .section-name {
-    margin: 0 0 10px;
-    color: var(--lime);
-    font-family: var(--font-mono);
-    font-size: 13px;
+    margin: 0 0 12px;
   }
 
   .doc-head h1 {
@@ -227,14 +230,14 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
 
   .description {
     margin: 0;
-    color: var(--muted);
+    color: var(--remix-text-muted);
     font-size: 1.1rem;
   }
 
   .doc-foot {
     margin-top: 64px;
     padding-top: 28px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--remix-card-line);
   }
 
   .pager {
@@ -248,18 +251,19 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
     flex-direction: column;
     gap: 4px;
     padding: 14px 18px;
-    border: 1px solid var(--border);
-    border-radius: var(--r-card);
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-card-radius);
+    box-shadow: var(--remix-card-lift);
     text-decoration: none;
-    transition: border-color 140ms ease;
+    transition: background-color 140ms ease;
   }
 
   .pager a:hover {
-    border-color: var(--lime-line);
+    background: var(--remix-paper-hover);
   }
 
   .pager span {
-    color: var(--faint);
+    color: var(--remix-text-muted);
     font-size: 13px;
   }
 
@@ -281,13 +285,13 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
     align-items: center;
     gap: 6px;
     margin-top: 24px;
-    color: var(--faint);
+    color: var(--remix-text-muted);
     font-size: 14px;
     text-decoration: none;
   }
 
   .edit:hover {
-    color: var(--lime);
+    color: var(--link);
   }
 
   /* Prose */
@@ -319,7 +323,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
 
   .prose :global(p),
   .prose :global(li) {
-    color: #cfd5c6;
+    color: color-mix(in oklab, var(--remix-text) 88%, var(--remix-surface));
   }
 
   .prose :global(ul),
@@ -332,39 +336,41 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
   }
 
   .prose :global(li::marker) {
-    color: var(--lime);
+    color: var(--remix-blue);
   }
 
   .prose :global(strong) {
-    color: var(--text);
+    color: var(--remix-text);
     font-weight: 620;
   }
 
   .prose :global(a) {
-    color: var(--lime);
+    color: var(--link);
     text-decoration: underline;
-    text-decoration-color: var(--lime-line);
+    text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent);
     text-underline-offset: 3px;
   }
 
   .prose :global(a:hover) {
-    text-decoration-color: var(--lime);
+    text-decoration-color: var(--link);
   }
 
   .prose :global(:not(pre) > code) {
     padding: 2px 6px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--remix-card-line);
     border-radius: 6px;
-    background: var(--surface);
-    color: var(--text);
+    background: var(--remix-inset);
+    color: var(--remix-text);
     font-size: 0.88em;
   }
 
+  /* !important: Shiki sets its theme's background inline on each block. */
   .prose :global(pre) {
     margin: 0 0 22px;
     padding: 16px 18px;
-    border: 1px solid var(--border);
-    border-radius: var(--r-code);
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-card-radius);
+    background-color: var(--code-bg) !important;
     font-size: 14px;
     line-height: 1.6;
     overflow-x: auto;
@@ -373,10 +379,9 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
   .prose :global(blockquote) {
     margin: 0 0 22px;
     padding: 14px 18px;
-    border: 1px solid var(--lime-line);
-    border-left: 3px solid var(--lime);
-    border-radius: 0 var(--r-card) var(--r-card) 0;
-    background: var(--lime-soft);
+    border: 1px solid var(--remix-card-line);
+    border-radius: var(--remix-card-radius);
+    background: color-mix(in oklab, var(--remix-yellow) 16%, var(--remix-surface));
   }
 
   .prose :global(blockquote p:last-child) {
@@ -393,7 +398,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
   .prose :global(th),
   .prose :global(td) {
     padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--remix-card-line);
     text-align: left;
     vertical-align: top;
   }
@@ -403,19 +408,19 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
   }
 
   .prose :global(th) {
-    color: var(--text);
+    background: var(--remix-inset);
+    color: var(--remix-text);
     font-weight: 600;
-    border-bottom-color: var(--border-strong);
   }
 
   .prose :global(td) {
-    color: #cfd5c6;
+    color: color-mix(in oklab, var(--remix-text) 88%, var(--remix-surface));
   }
 
   .prose :global(hr) {
     margin: 40px 0;
     border: 0;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--remix-card-line);
   }
 
   @media (max-width: 1180px) {
@@ -442,9 +447,9 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
     }
 
     .menu {
-      border: 1px solid var(--border);
-      border-radius: var(--r-card);
-      background: var(--surface);
+      border: 1px solid var(--remix-card-line);
+      border-radius: var(--remix-card-radius);
+      background: var(--remix-surface);
     }
 
     .menu summary {
@@ -463,7 +468,7 @@ const editUrl = `${site.websiteRepo}/edit/main/src/content/docs/${doc.id}.md`;
 
     .menu nav {
       padding: 4px 16px 18px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--remix-card-line);
     }
 
     .menu .group:first-child {

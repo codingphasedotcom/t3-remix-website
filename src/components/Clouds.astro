@@ -1,0 +1,45 @@
+---
+interface Props {
+  // Pattern ids go into url(#...), and the page can hold more than one set of clouds.
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<svg aria-hidden="true" class="clouds">
+  <defs>
+    <pattern id={`${id}-far`} width="300" height="128" patternUnits="userSpaceOnUse" x="-90">
+      <circle cx="0" cy="112" r="58" />
+      <circle cx="92" cy="96" r="50" />
+      <circle cx="180" cy="114" r="62" />
+      <circle cx="300" cy="112" r="58" />
+    </pattern>
+    <pattern id={`${id}-near`} class="near" width="360" height="128" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="140" r="60" />
+      <circle cx="84" cy="132" r="44" />
+      <circle cx="168" cy="146" r="66" />
+      <circle cx="262" cy="134" r="46" />
+      <circle cx="360" cy="140" r="60" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill={`url(#${id}-far)`} />
+  <rect width="100%" height="100%" fill={`url(#${id}-near)`} />
+</svg>
+
+<style>
+  .clouds {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  circle {
+    fill: var(--remix-cloud-far);
+  }
+
+  .near circle {
+    fill: var(--remix-cloud);
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+// The app's sticker drawings (apps/web/src/components/board/RemixArt.tsx): flat fills under a thick
+// ink outline. All are static and decorative, so screen readers skip them.
+export type ArtName = "bulb" | "clipboard" | "gear" | "magnifier" | "warning" | "check" | "rocket";
+
+interface Props {
+  name: ArtName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const puffs = [
+  { cx: 70, cy: 150, r: 20 },
+  { cx: 96, cy: 140, r: 26 },
+  { cx: 126, cy: 146, r: 22 },
+  { cx: 148, cy: 154, r: 15 },
+];
+---
+
+<svg
+  aria-hidden="true"
+  viewBox={name === "rocket" ? "0 0 220 180" : "0 0 48 48"}
+  fill="none"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+>
+  {
+    name === "gear" && (
+      <>
+        <path
+          d="M20.3 8.4L20.7 3.3L27.3 3.3L27.7 8.4L32.4 10.4L36.3 7.0L41.0 11.7L37.6 15.6L39.6 20.3L44.7 20.7L44.7 27.3L39.6 27.7L37.6 32.4L41.0 36.3L36.3 41.0L32.4 37.6L27.7 39.6L27.3 44.7L20.7 44.7L20.3 39.6L15.6 37.6L11.7 41.0L7.0 36.3L10.4 32.4L8.4 27.7L3.3 27.3L3.3 20.7L8.4 20.3L10.4 15.6L7.0 11.7L11.7 7.0L15.6 10.4Z"
+          stroke-width="3"
+          class="ink blue"
+        />
+        <circle cx="24" cy="24" r="7" stroke-width="3" class="ink glass" />
+        <path d="M13 18a12 12 0 0 1 6-6" stroke-width="2.5" class="shine" />
+      </>
+    )
+  }
+  {
+    name === "magnifier" && (
+      <>
+        <path d="M31 31 42 42" stroke-width="10" class="ink" />
+        <path d="M31 31 42 42" stroke-width="4.5" class="line-yellow" />
+        <circle cx="20" cy="20" r="15" stroke-width="3" class="ink blue" />
+        <circle cx="20" cy="20" r="10" stroke-width="2.5" class="ink glass" />
+        <path d="M14 18a6.5 6.5 0 0 1 5-5" stroke-width="2.5" class="line-white" />
+      </>
+    )
+  }
+  {
+    name === "warning" && (
+      <>
+        <path d="M24 5 44.5 41.5H3.5Z" stroke-width="3.5" class="ink yellow" />
+        <path d="M24 18v11" stroke-width="4.5" class="ink" />
+        <circle cx="24" cy="35.5" r="2.6" class="solid-ink" />
+        <path d="M17 24.5 20.5 18.5" stroke-width="2.5" class="shine" />
+      </>
+    )
+  }
+  {
+    name === "check" && (
+      <>
+        <circle cx="24" cy="24" r="20" stroke-width="3" class="ink green" />
+        <path d="M15 24.5 21.5 31 33.5 17.5" stroke-width="9" class="ink" />
+        <path d="M15 24.5 21.5 31 33.5 17.5" stroke-width="4.5" class="line-white" />
+        <path d="M11.5 18a14 14 0 0 1 6-7" stroke-width="2.5" class="shine" />
+      </>
+    )
+  }
+  {
+    name === "bulb" && (
+      <>
+        <path
+          d="M17.5 33.5c0-4-5.5-6.5-5.5-13.5a12 12 0 0 1 24 0c0 7-5.5 9.5-5.5 13.5Z"
+          stroke-width="3"
+          class="ink yellow"
+        />
+        <rect x="17.5" y="33.5" width="13" height="9" rx="3" stroke-width="3" class="ink purple" />
+        <path d="M17.5 38h13" stroke-width="2.5" class="ink" />
+        <path d="M17 18a7 7 0 0 1 4.5-5" stroke-width="2.5" class="line-white" />
+        <path d="M4 12 7 13.5M44 12 41 13.5M24 1.5V4" stroke-width="3" class="ink" />
+      </>
+    )
+  }
+  {
+    name === "clipboard" && (
+      <>
+        <rect x="8" y="7" width="32" height="38" rx="6" stroke-width="3" class="ink white" />
+        <rect x="16" y="3" width="16" height="9" rx="3" stroke-width="3" class="ink orange" />
+        <path d="M14.5 22.5 17 25l4-4.5M14.5 33.5 17 36l4-4.5" stroke-width="3" class="ink" />
+        <path d="M25 23h9M25 34h9" stroke-width="3" class="line-orange" />
+      </>
+    )
+  }
+  {
+    name === "rocket" && (
+      <>
+        <path d="M28 120c10-30 34-46 58-50" stroke-width="3" stroke-dasharray="7 9" class="ink" />
+        <path d="M150 128c22-6 40-20 52-42" stroke-width="3" stroke-dasharray="7 9" class="ink" />
+        <g transform="translate(120 74) rotate(38)">
+          <path d="M-12 36Q0 76 12 36Z" stroke-width="3" class="ink orange" />
+          <path d="M-6 38Q0 60 6 38Z" class="yellow" />
+          <path
+            d="M-22 4-40 30-38 42-20 30ZM22 4 40 30 38 42 20 30Z"
+            stroke-width="3"
+            class="ink pink"
+          />
+          <path d="M0-58C20-42 27-12 22 36H-22C-27-12-20-42 0-58Z" stroke-width="3" class="ink white" />
+          <path d="M0-58C11-49 17-38 20-26H-20C-17-38-11-49 0-58Z" stroke-width="3" class="ink pink" />
+          <circle cx="0" cy="2" r="11" stroke-width="3" class="ink blue" />
+          <path d="M-5-2a6 6 0 0 1 4-4" stroke-width="2.5" class="line-white" />
+          <path d="M-8 36h16" stroke-width="3" class="ink" />
+        </g>
+        {puffs.map((puff) => <circle {...puff} stroke-width="6" class="ink" />)}
+        {puffs.map((puff) => <circle {...puff} class="white" />)}
+        <path d="M60 172h100" stroke-width="3" class="ink" />
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .ink {
+    stroke: var(--remix-ink);
+  }
+
+  .solid-ink {
+    fill: var(--remix-ink);
+  }
+
+  .white {
+    fill: #ffffff;
+  }
+
+  .blue {
+    fill: var(--remix-blue);
+  }
+
+  .glass {
+    fill: var(--remix-glass);
+  }
+
+  .yellow {
+    fill: var(--remix-yellow);
+  }
+
+  .green {
+    fill: var(--remix-green);
+  }
+
+  .purple {
+    fill: var(--remix-purple);
+  }
+
+  .orange {
+    fill: var(--remix-orange);
+  }
+
+  .pink {
+    fill: var(--remix-pink);
+  }
+
+  .shine {
+    stroke: rgb(255 255 255 / 0.8);
+  }
+
+  .line-white {
+    stroke: #ffffff;
+  }
+
+  .line-yellow {
+    stroke: var(--remix-yellow);
+  }
+
+  .line-orange {
+    stroke: var(--remix-orange);
+  }
+</style>
