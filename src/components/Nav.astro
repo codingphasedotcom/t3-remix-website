@@ -11,7 +11,8 @@ const inDocs = path.startsWith("/docs") && !inDevlog;
   <div class="container nav-inner">
     <a class="brand" href="/" aria-label="T3 Remix home">
       <img src="/icon-192.png" alt="" width="30" height="30" />
-      <span>T3 Remix</span>
+      <!-- The logo already reads T3, so the word stays for search engines and screen readers. -->
+      <span><span class="sr-only">T3 </span>Remix</span>
     </a>
     <nav class="links" aria-label="Main">
       <a href="/#features">Features</a>
@@ -51,7 +52,7 @@ const inDocs = path.startsWith("/docs") && !inDevlog;
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
     font-weight: 700;
     font-size: 17px;
     letter-spacing: -0.02em;
