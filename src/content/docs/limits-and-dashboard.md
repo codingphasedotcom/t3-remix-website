@@ -18,19 +18,16 @@ Set a monthly token limit for the whole company under **Edit company**, or for o
 
 **Dashboard** shows how the company is doing.
 
-At the top:
-
-- Open and finished tasks
-- Who is working now
-- How often runs succeed
-- How long tasks take from creation to done
-- Tokens spent
+At the top, a one-line summary and four tiles: open tasks, who is working now, tasks finished, and how often runs succeed. Their arrows jump to the board or org chart.
 
 Below that:
 
+- **Token budget**: used, limit, and remaining when the company has a monthly limit, or the last 14 days when it doesn't, with a trend line
+- **Tasks**: your most urgent open tasks, with agents at work first, then blocked, in review, and queued. Click one to open it.
 - Daily activity for the last 14 days
 - A **Needs attention** list: blocked or unassigned tasks, hire requests, and every employee thread whose latest run failed
-- A breakdown by model and by department
+- **Recent runs**: who ran what, newest first
+- A breakdown by model, department, and column
 - A row for every employee
 
 A failed run in **Needs attention** opens its thread. It leaves the list once that thread runs again without failing, whether the board restarts it or you continue it from the thread itself, or once the thread settles.

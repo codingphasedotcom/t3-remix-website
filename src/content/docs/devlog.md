@@ -7,6 +7,32 @@ order: 4
 
 Every T3 Remix release, newest first, with what it adds and the T3 Code release it is built on. Download any version from [GitHub Releases](https://github.com/codingphasedotcom/t3-remix/releases).
 
+## 0.1.7
+
+**November 6, 2026** · Built on T3 Code 0.1.7 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.7)
+
+A new colorful look, a fuller dashboard, and your agents can use the skills you already have installed.
+
+### New
+
+- **Installed skills.** The **Skills** tab lists the skills your coding agents already have on the computer, such as Claude Code skills and plugins or Codex skills. Add one to the library and tick it on employees like any other skill. Agents read it from where it's installed, so they always follow the current version.
+- **A new dashboard.** A greeting with today's date and a one-line summary, large stat tiles that jump to the board and org chart, a token budget card with a trend line, a table of your most urgent open tasks, and a feed of recent runs.
+- **Inbox.** One place for everything waiting on you, across every company: tasks to review, stuck tasks, hire requests, and your own to-dos.
+- **Tasks that wait on other tasks.** Pick what must finish first under **Waits on**, and the task starts on its own once they're done.
+- **Pictures on comments.** Paste, drop, or attach screenshots and files in a comment. Claude and Codex agents see pictures as images.
+
+### Changed
+
+- The company pages have a new colorful look: a pale background, color for each board column, speech-bubble titles, soft outlines, and small drawings.
+- The Activity chart has values on its bars.
+- T3 Remix now has its own `t3` server downloads, so `t3 update` and the installer stay on T3 Remix.
+- Built on T3 Code 0.1.7, with more than 1,300 changes from T3 Code.
+
+### Downloads
+
+- Installers for macOS (Apple silicon and Intel), Windows x64, and Linux x64.
+- Builds are not signed. [Install](/docs/install/) shows how to open them the first time.
+
 ## 0.1.6
 
 **October 31, 2026** · Built on T3 Code 0.1.5 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.6)

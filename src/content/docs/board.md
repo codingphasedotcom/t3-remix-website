@@ -60,6 +60,18 @@ When a subtask sits in **Blocked**, its manager is started to unblock it. The ma
 
 A subtask that is only waiting on its own subtasks does not count as stuck.
 
+## Tasks that wait on other tasks
+
+Under **Waits on**, in a new task or an open one, pick the tasks that must be done first. The task stays in **To do** until every one of them is **Done**, then starts on its own. Its card says what it waits on, and the task it waits on lists it under **Needed by**.
+
+## Inbox
+
+**Inbox** gathers everything waiting on you, from every company: tasks to review, tasks an agent is stuck on, hire requests, and your own to-dos. Click an item to open it.
+
+## Pictures on comments
+
+Paste, drop, or attach pictures and other files in a comment. Claude and Codex agents see pictures as images. Agents on other providers get each file's path and open it themselves.
+
 ## Tasks for yourself
 
 Pick **You** as the assignee to keep a task for yourself, like a card on your own kanban board. No agent works on it, reviews it, or answers its comments; it moves only when you move it. Assign an employee whenever you want to hand it off.
