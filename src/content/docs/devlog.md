@@ -7,6 +7,32 @@ order: 4
 
 Every T3 Remix release, newest first, with what it adds and the T3 Code release it is built on. Download any version from [GitHub Releases](https://github.com/codingphasedotcom/t3-remix/releases).
 
+## 0.1.8
+
+**November 9, 2026** · Built on T3 Code 0.1.7 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.8)
+
+See your project over time, let an agent finish the merge, and take a whole company with you as a file.
+
+### New
+
+- **Timeline.** A new page beside the board. **Tasks** charts two weeks at a time, with each task as a bar from creation to done and the faces of who worked on it. **Updates** lists what happened day by day, and **Git** shows commits, merges, and what's still waiting to merge.
+- **Merge and finish.** A task in **Review** can have its agent merge its pull request or branch and fix any conflicts; the task moves to **Done** when it lands. **Mark done** moves it there without merging.
+- **Long conversations stay readable.** A task's **Activity** tab opens on the newest message with the comment box pinned below it. Older messages load when you ask, and runs of board updates fold into one line.
+- **Agents can ask for skills.** An agent can request a skill from the library, or one installed on your computer, for itself or someone it manages. The request lands in your **Inbox**, where **Add skill** or **Decline** settles it.
+- **Share a company as a file.** **Export company** saves the team, skills, routines, and instructions. **Import a company** starts it on any computer running T3 Remix. Installed skills match by name, and you pick a model for anyone whose model isn't set up there.
+- **Finished tasks clean up their worktrees.** A task's worktrees are removed at the next cleanup once its main task and every subtask are done, or the main task is archived. Worktrees with uncommitted changes stay, and branches are kept so a reopened task gets its checkout back. An **Open worktrees** card on the dashboard shows which tasks are holding them open.
+
+### Changed
+
+- **Archive all** now clears finished subtasks of open tasks too, and one failure no longer stops the rest. A finished subtask can be archived on its own.
+- The **Inbox** button is just its icon and count.
+- Primary buttons use the spray-paint lime.
+
+### Downloads
+
+- Installers for macOS (Apple silicon and Intel), Windows x64, and Linux x64.
+- Builds are not signed. [Install](/docs/install/) shows how to open them the first time.
+
 ## 0.1.7
 
 **November 6, 2026** · Built on T3 Code 0.1.7 · [Release notes and downloads](https://github.com/codingphasedotcom/t3-remix/releases/tag/v0.1.7)
